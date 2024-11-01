@@ -111,6 +111,7 @@
         margin: 5px;
         margin-top: 25px;
         border-radius: 2px;
+        font-size: smaller;
     }
 
     .button:hover {
@@ -124,6 +125,7 @@
         padding: 10px;
         margin: 5px;
         border-radius: 2px;
+        font-size: smaller;
     }
 
     .akun {
@@ -183,7 +185,7 @@
         animation: masuk .5s ease-in;
     }
 
-    .teks {
+    .style_teks {
         color: #ff2222;
         font-size: larger;
         text-shadow: 1px 1px 0px #000, -1px 1px 0px #000, 1px -1px 0px #000, -1px -1px 0px #000;
@@ -201,7 +203,7 @@
         margin-top: 80vh;
     }
 
-    @media screen and (max-width:500px){
+    @media screen and (max-width:500px) {
         .bar {
             margin-top: 25%;
         }
@@ -214,8 +216,10 @@
             <div class="column" id="profil">
                 <img src="foto.jpg" id="foto" />
                 <div class="row">
-                    <a class="button" onclick="beranda()">Beranda</a><a class="button" onclick="tentang()">Tentang</a><a
-                        class="button" onclick="hobi()">Hobi</a>
+                    <a class="button" onclick="beranda()">Beranda</a>
+                    <a class="button" onclick="tentang()">Tentang</a>
+                    <a class="button" onclick="hobi()">Hobi</a>
+                    <a class="button" onclick="ttc()">TTC</a>
                 </div>
             </div>
         </nav>
@@ -223,13 +227,21 @@
         <nav class="bar2" id="bar2">
             <img src="foto.jpg" id="foto2" />
             <div class="row2">
-                <a class="button2" onclick="beranda()">Beranda</a><a class="button2" onclick="tentang()">Tentang</a><a
-                    class="button2" onclick="hobi()">Hobi</a>
+                <a class="button2" onclick="beranda()">Beranda</a>
+                <a class="button2" onclick="tentang()">Tentang</a>
+                <a class="button2" onclick="hobi()">Hobi</a>
+                <a class="button2" onclick="ttc()">TTC</a>
             </div>
         </nav>
-        <div class="papan" id="papan">
-            <p class="teks"></p>
+        <div class="papan" id="papan">oo
+            <p class="teks_tentang style_teks" id="isi_tentang"></p>
+            <p class="teks_hobi style_teks" id="isi_hobi"></p>
+            <p class="teks_fb style_teks" id="isi_fb"></p>
+            <p class="teks_ml style_teks" id="isi_ml"></p>
+            <p class="teks_ttc style_teks" id="ttc"></p>
         </div>
+        
+        <a class="button" style="background-color: #000000; color: #ff2222; text-decoration: none;" href="ttc.html" id="main">Main</a>
 
         <div class="footer column" id="akun">
             <p class="teks2">My Acount</p>
@@ -240,7 +252,9 @@
     </div>
 
     <script>
+        let TA = 0;
         bar2.style.display = "none"
+        main.style.display = "none"
         papan.style.display = "none"
         function posisi2() {
             bar.style.display = "flex"
@@ -254,79 +268,154 @@
             bar.style.display = "none"
             akun.style.display = "none"
         }
-        function hobi() {posisi();kataHobi()}
-        function tentang() {posisi();kataTentang()}
-        function FB() {posisi();kataFB()}
-        function ML() {posisi();kataML()}
+        function hobi() { posisi(); kataHobi() }
+        function tentang() { posisi(); kataTentang() }
+        function ttc() { posisi(); kataTTC() }
+        function FB() { posisi(); kataFB() }
+        function ML() { posisi(); kataML() }
         function beranda() {posisi2()}
         function kataHobi() {
-            const jalan = document.querySelector(".teks");
-            const teks = "Ciee...pengen tau hobi saya:>....\n Sebenarnya saya punya banyak hobi, Tapi saya saya orangnya mageran banget. jadi bisa di bilang hobi saya adalah bersantai :v, tetapi saya juga suka menulis cerita dan suka menggambar walaupun gambar saya biasa biasa saja:)";
+            TA += 1;
+            if (TA == 1) {
+                isi_hobi.style.display = "block"
+                isi_tentang.style.display = "none"
+                isi_fb.style.display = "none"
+                isi_ml.style.display = "none"
+                const jalan = document.querySelector(".teks_hobi");
+                let teks = "Ciee...pengen tau hobi saya:>....\n Sebenarnya saya punya banyak hobi, Tapi saya saya orangnya mageran banget. jadi bisa di bilang hobi saya adalah bersantai :v, tetapi saya juga suka menulis cerita dan suka menggambar walaupun gambar saya biasa biasa saja:)";
 
-            function textTypingEffect(elemet, teks, i = 0) {
-                if (i === 0) {
-                    elemet.textContent = "";
-                }
-                elemet.textContent += teks[i];
+                function textTypingEffect(elemet, teks, i = 0) {
+                    if (i === 0) {
+                        elemet.textContent = "";
+                    }
+                    elemet.textContent += teks[i];
 
-                if (i === teks.length - 1) {
-                    return;
+                    if (i === teks.length - 1) {
+                        TA = 0;
+                        return;
+                    }
+                    setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
                 }
-                setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
+                textTypingEffect(jalan, teks)
             }
-            textTypingEffect(jalan, teks)
+
+            if(TA>1){
+                alert('Gak usah buru-buru, Tunggu teks nya selesai:>')
+            }
         }
 
         function kataTentang() {
-            const jalan = document.querySelector(".teks");
-            const teks = "Halo... Perkenalkan nama saya Tobi, panggil saja Tobi. Saya adalah seorang programer eh...! Maksudnya seorang calon programer:>. Saya bisa menggunakan bahasa pemograman python dan javascript walapun masih dasar dasarnya, dan web ini di buat emnggunakan HTML CSS dan JS (JavaScript)";
+            TA += 1;
+            if (TA == 1) {
+                isi_hobi.style.display = "none"
+                isi_tentang.style.display = "block"
+                isi_fb.style.display = "none"
+                isi_ml.style.display = "none"
+                const jalan = document.querySelector(".teks_tentang");
+                let teks = "Halo... Perkenalkan nama saya Tobi, panggil saja Tobi. Saya adalah seorang programer eh...! Maksudnya seorang calon programer:>. Saya bisa menggunakan bahasa pemograman python dan javascript walapun masih dasar dasarnya, dan web ini di buat emnggunakan HTML CSS dan JS (JavaScript)";
 
-            function textTypingEffect(elemet, teks, i = 0) {
-                if (i === 0) {
-                    elemet.textContent = "";
-                }
-                elemet.textContent += teks[i];
+                function textTypingEffect(elemet, teks, i = 0) {
+                    if (i === 0) {
+                        elemet.textContent = "";
+                    }
+                    elemet.textContent += teks[i];
 
-                if (i === teks.length - 1) {
-                    return;
+                    if (i === teks.length - 1) {
+                        TA = 0;
+                        return;
+                    }
+                    setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
                 }
-                setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
+                textTypingEffect(jalan, teks)
             }
-            textTypingEffect(jalan, teks)
+            if(TA>1){
+                alert('Gak usah buru-buru, Tunggu teks nya selesai:>')
+            }
+        }
+        function kataTTC() {
+            TA += 1;
+            if (TA == 1) {
+                isi_hobi.style.display = "none"
+                isi_tentang.style.display = "block"
+                isi_fb.style.display = "none"
+                isi_ml.style.display = "none"
+                const jalan = document.querySelector(".teks_ttc");
+                let teks = "Apa kamu yakin mau bermain Tic-Tac-Toe melawan saya? Klick tombol Main jika sudah yakin:>";
+
+                function textTypingEffect(elemet, teks, i = 0) {
+                    if (i === 0) {
+                        elemet.textContent = "";
+                    }
+                    elemet.textContent += teks[i];
+
+                    if (i === teks.length - 1) {
+                        TA = 0;
+                        main.style.display = "block";
+                        return;
+                    }
+                    setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
+                }
+                textTypingEffect(jalan, teks)
+            }
+            if(TA>1){
+                alert('Gak usah buru-buru, Tunggu teks nya selesai:>')
+            }
         }
         function kataFB() {
-            const jalan = document.querySelector(".teks");
-            const teks = "Ciee...Pengen tau akun facebook saya:>....Tapi maaf saya tidak butuh follower :v";
+            TA += 1;
+            if (TA == 1) {
+                isi_hobi.style.display = "none"
+                isi_tentang.style.display = "none"
+                isi_fb.style.display = "block"
+                isi_ml.style.display = "none"
+                const jalan = document.querySelector(".teks_fb");
+                let teks = "Ciee...Pengen tau akun facebook saya:>....Tapi maaf saya tidak butuh follower :v";
 
-            function textTypingEffect(elemet, teks, i = 0) {
-                if (i === 0) {
-                    elemet.textContent = "";
-                }
-                elemet.textContent += teks[i];
+                function textTypingEffect(elemet, teks, i = 0) {
+                    if (i === 0) {
+                        elemet.textContent = "";
+                    }
+                    elemet.textContent += teks[i];
 
-                if (i === teks.length - 1) {
-                    return;
+                    if (i === teks.length - 1) {
+                        TA = 0;
+                        return;
+                    }
+                    setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
                 }
-                setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
+                textTypingEffect(jalan, teks)
             }
-            textTypingEffect(jalan, teks)
+            if(TA>1){
+                alert('Gak usah buru-buru, Tunggu teks nya selesai:>')
+            }
         }
         function kataML() {
-            const jalan = document.querySelector(".teks");
-            const teks = "Ada apa? Mau mabar Mobile Legend? Tapi maaf saya tidak suka bermain dengan darksystem:>";
+            TA += 1;
+            if (TA == 1) {
+                isi_hobi.style.display = "none"
+                isi_tentang.style.display = "none"
+                isi_fb.style.display = "none"
+                isi_ml.style.display = "ml"
+                const jalan = document.querySelector(".teks_ml");
+                let teks = "Ada apa? Mau mabar Mobile Legend? Tapi maaf saya tidak suka bermain dengan darksystem:>";
 
-            function textTypingEffect(elemet, teks, i = 0) {
-                if (i === 0) {
-                    elemet.textContent = "";
-                }
-                elemet.textContent += teks[i];
+                function textTypingEffect(elemet, teks, i = 0) {
+                    if (i === 0) {
+                        elemet.textContent = "";
+                    }
+                    elemet.textContent += teks[i];
 
-                if (i === teks.length - 1) {
-                    return;
+                    if (i === teks.length - 1) {
+                        TA=0;
+                        return;
+                    }
+                    setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
                 }
-                setTimeout(() => textTypingEffect(elemet, teks, i + 1), 50)
+                textTypingEffect(jalan, teks)
             }
-            textTypingEffect(jalan, teks)
+            if(TA>1){
+                alert('Gak usah buru-buru, Tunggu teks nya selesai:>')
+            }
         }
     </script>
 </body>

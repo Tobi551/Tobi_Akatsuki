@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTC</title>
+</head>
+<style>
+    *,
+    html {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000000;
+    }
+
+    .container {
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .baris {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .kotak {
+        background-color: #ff2222;
+        width: 60px;
+        height: 60px;
+    }
+
+    .isi {
+        background-color: #ffffff;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px;
+    }
+
+    p {
+        color: #ff2222;
+        font-family: monospace;
+    }
+
+    .sekor {
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+        position: absolute;
+        margin-top: -500px;
+    }
+
+    .papan {
+        margin-top: -300px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 60%;
+        border: 1px solid #ff2222;
+        background-color: #ffffff8e;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 14px #ff2222;
+        animation: masuk .3s ease-in;
+    }
+
+    .notif {
+        font-size: larger;
+        text-shadow: 1px 1px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
+    }
+
+    @keyframes masuk {
+        0% {
+            scale: 80%;
+        }
+
+        50% {
+            scale: 90%;
+        }
+
+        100% {
+            scale: 100%;
+        }
+    }
+
+    a {
+        border-radius: 5px;
+        background-color: #ff2222;
+        padding: 15px;
+        font-family: monospace;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bungkusA{
+        position: absolute;
+        margin-top: 350px;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<body>
+    <div class="sekor">
+        <p id="skor">(X) Tobi : 0</p>
+        <p>(O) Kamu : 0</p>
+    </div>
+
+    <div class="papan" id="papan">
+        <p class="notif">Kamu kalah dasar pecun:v</p>
+    </div>
+
+    <div class="container">
+
+        <div class="baris">
+
+            <div class="isi" id="kotak11">
+                <div class="isi" id="kotak12">
+                    <div class="kotak" onclick="kotak1()" id="no1"></div>
+                </div>
+            </div>
+
+            <div class="isi" id="kotak21">
+                <div class="isi" id="kotak22">
+                    <div class="kotak" onclick="kotak2()" id="no2"> </div>
+                </div>
+            </div>
+
+            <div class="isi" id="kotak31">
+                <div class="isi" id="kotak32">
+                    <div class="kotak" onclick="kotak3()" id="no3"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="baris">
+            <div class="isi" id="kotak41">
+                <div class="isi" id="kotak42">
+                    <div class="kotak" onclick="kotak4()" id="no4"></div>
+                </div>
+            </div>
+
+            <div class="isi" id="kotak51">
+                <div class="isi" id="kotak52">
+                    <div class="kotak" onclick="kotak5()" id="no5"></div>
+                </div>
+            </div>
+
+            <div class="isi" id="kotak61">
+                <div class="isi" id="kotak62">
+                    <div class="kotak" onclick="kotak6()" id="no6"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="baris">
+            <div class="isi" id="kotak71">
+                <div class="isi" id="kotak72">
+                    <div class="kotak" onclick="kotak7()" id="no7"></div>
+                </div>
+            </div>
+
+
+            <div class="isi" id="kotak81">
+                <div class="isi" id="kotak82">
+                    <div class="kotak" onclick="kotak8()" id="no8"></div>
+                </div>
+            </div>
+
+
+            <div class="isi" id="kotak91">
+                <div class="isi" id="kotak92">
+                    <div class="kotak" onclick="kotak9()" id="no9"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="bungkusA">
+        <a onclick="mainualng()" id="mainlagi">Main Lagi</a>
+        <a href="index.html" id="home" style="text-decoration: none;">Home</a>
+    </div>
+    <script>
+        let klick = 0;
+        let nilai = 0;
+        let a = 0;
+        papan.style.display = "none";
+        mainlagi.style.display = "none";
+        home.style.display = "none";
+        function end() {
+            a += 1;
+            skor.textContent = "(X) Tobi :" + a;
+            papan.style.display = "flex";
+            mainlagi.style.display = "flex";
+            home.style.display = "flex";
+            no3.style.display = "none";
+            kotak31.style.height = "10px";
+            kotak31.style.transform = "rotate(45deg)";
+            kotak32.style.width = "10px";
+            kotak32.style.scale = "100%";
+            kotak32.style.backgroundColor = "#ffffff";
+            kotak32.style.borderRadius = "0px";
+            kotak31.style.borderRadius = "0px";
+            no5.style.display = "none";
+            kotak51.style.height = "10px";
+            kotak51.style.transform = "rotate(45deg)";
+            kotak52.style.width = "10px";
+            kotak52.style.scale = "100%";
+            kotak52.style.backgroundColor = "#ffffff";
+            kotak52.style.borderRadius = "0px";
+            kotak51.style.borderRadius = "0px";
+            no7.style.display = "none";
+            kotak71.style.height = "10px";
+            kotak71.style.transform = "rotate(45deg)";
+            kotak72.style.width = "10px";
+            kotak72.style.scale = "100%";
+            kotak72.style.backgroundColor = "#ffffff";
+            kotak72.style.borderRadius = "0px";
+            kotak71.style.borderRadius = "0px";
+            kotak31.style.backgroundColor = "#52ff1e"
+            kotak32.style.backgroundColor = "#52ff1e"
+            kotak51.style.backgroundColor = "#52ff1e"
+            kotak52.style.backgroundColor = "#52ff1e"
+            kotak71.style.backgroundColor = "#52ff1e"
+            kotak72.style.backgroundColor = "#52ff1e"
+        }
+        function kotak1() {
+            klick += 1;
+            nilai += 1;
+
+            if (klick == 1) {
+                no1.style.display = "none"
+                kotak11.style.borderRadius = "50%";
+                kotak12.style.borderRadius = "50%";
+                kotak12.style.scale = "70%";
+                kotak12.style.backgroundColor = "#000000";
+
+                no5.style.display = "none";
+                kotak51.style.height = "10px";
+                kotak51.style.transform = "rotate(45deg)";
+                kotak52.style.width = "10px";
+                kotak52.style.scale = "100%";
+                kotak52.style.backgroundColor = "#ffffff";
+                kotak52.style.borderRadius = "0px";
+                kotak51.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+            }
+
+
+        }
+        function kotak2() {
+            klick += 1;
+            nilai += 1;
+
+            if (klick == 1) {
+                no2.style.display = "none"
+                kotak21.style.borderRadius = "50%";
+                kotak22.style.borderRadius = "50%";
+                kotak22.style.scale = "70%";
+                kotak22.style.backgroundColor = "#000000";
+
+                no7.style.display = "none";
+                kotak71.style.height = "10px";
+                kotak71.style.transform = "rotate(45deg)";
+                kotak72.style.width = "10px";
+                kotak72.style.scale = "100%";
+                kotak72.style.backgroundColor = "#ffffff";
+                kotak72.style.borderRadius = "0px";
+                kotak71.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+
+            }
+        }
+        function kotak3() {
+            klick += 1;
+            nilai += 1;
+
+            if (klick == 1) {
+                no3.style.display = "none"
+                kotak31.style.borderRadius = "50%";
+                kotak32.style.borderRadius = "50%";
+                kotak32.style.scale = "70%";
+                kotak32.style.backgroundColor = "#000000";
+
+                no8.style.display = "none";
+                kotak81.style.height = "10px";
+                kotak81.style.transform = "rotate(45deg)";
+                kotak82.style.width = "10px";
+                kotak82.style.scale = "100%";
+                kotak82.style.backgroundColor = "#ffffff";
+                kotak82.style.borderRadius = "0px";
+                kotak81.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+            }
+        }
+        function kotak4() {
+            klick += 1;
+            nilai += 1;
+
+            if (klick == 1) {
+                no4.style.display = "none"
+                kotak41.style.borderRadius = "50%";
+                kotak42.style.borderRadius = "50%";
+                kotak42.style.scale = "70%";
+                kotak42.style.backgroundColor = "#000000";
+
+                no7.style.display = "none";
+                kotak71.style.height = "10px";
+                kotak71.style.transform = "rotate(45deg)";
+                kotak72.style.width = "10px";
+                kotak72.style.scale = "100%";
+                kotak72.style.backgroundColor = "#ffffff";
+                kotak72.style.borderRadius = "0px";
+                kotak71.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+
+            }
+        }
+        function kotak5() {
+            klick += 1;
+            nilai += 1;
+            if (nilai == 3) { klick = 10; end(); }
+            if (klick == 1) {
+                no5.style.display = "none"
+                kotak51.style.borderRadius = "50%";
+                kotak52.style.borderRadius = "50%";
+                kotak52.style.scale = "70%";
+                kotak52.style.backgroundColor = "#000000";
+
+                no1.style.display = "none";
+                kotak11.style.height = "10px";
+                kotak11.style.transform = "rotate(45deg)";
+                kotak12.style.width = "10px";
+                kotak12.style.scale = "100%";
+                kotak12.style.backgroundColor = "#ffffff";
+                kotak12.style.borderRadius = "0px";
+                kotak11.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+            }
+        }
+        function kotak6() {
+            klick += 1;
+            nilai += 1;
+            if (nilai == 3) { klick = 10; end(); }
+            if (klick == 1) {
+                no6.style.display = "none"
+                kotak61.style.borderRadius = "50%";
+                kotak62.style.borderRadius = "50%";
+                kotak62.style.scale = "70%";
+                kotak62.style.backgroundColor = "#000000";
+
+                no3.style.display = "none";
+                kotak31.style.height = "10px";
+                kotak31.style.transform = "rotate(45deg)";
+                kotak32.style.width = "10px";
+                kotak32.style.scale = "100%";
+                kotak32.style.backgroundColor = "#ffffff";
+                kotak32.style.borderRadius = "0px";
+                kotak31.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+
+            }
+        }
+        function kotak7() {
+            klick += 1;
+            nilai += 1;
+            if (nilai == 3) { klick = 10; end(); }
+            if (klick == 1) {
+                no7.style.display = "none"
+                kotak71.style.borderRadius = "50%";
+                kotak72.style.borderRadius = "50%";
+                kotak72.style.scale = "70%";
+                kotak72.style.backgroundColor = "#000000";
+
+
+                no4.style.display = "none";
+                kotak41.style.height = "10px";
+                kotak41.style.transform = "rotate(45deg)";
+                kotak42.style.width = "10px";
+                kotak42.style.scale = "100%";
+                kotak42.style.backgroundColor = "#ffffff";
+                kotak42.style.borderRadius = "0px";
+                kotak41.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+
+            }
+        }
+        function kotak8() {
+            klick += 1;
+            nilai += 1;
+            if (nilai == 3) { klick = 10; end(); }
+            if (klick == 1) {
+                no8.style.display = "none"
+                kotak81.style.borderRadius = "50%";
+                kotak82.style.borderRadius = "50%";
+                kotak82.style.scale = "70%";
+                kotak82.style.backgroundColor = "#000000";
+
+                no3.style.display = "none";
+                kotak31.style.height = "10px";
+                kotak31.style.transform = "rotate(45deg)";
+                kotak32.style.width = "10px";
+                kotak32.style.scale = "100%";
+                kotak32.style.backgroundColor = "#ffffff";
+                kotak32.style.borderRadius = "0px";
+                kotak31.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+
+            }
+        }
+        function kotak9() {
+            klick += 1;
+            nilai += 1;
+            if (nilai == 3) { klick = 10; end(); }
+            if (klick == 1) {
+                no9.style.display = "none"
+                kotak91.style.borderRadius = "50%";
+                kotak92.style.borderRadius = "50%";
+                kotak92.style.scale = "70%";
+                kotak92.style.backgroundColor = "#000000";
+
+                no4.style.display = "none";
+                kotak41.style.height = "10px";
+                kotak41.style.transform = "rotate(45deg)";
+                kotak42.style.width = "10px";
+                kotak42.style.scale = "100%";
+                kotak42.style.backgroundColor = "#ffffff";
+                kotak42.style.borderRadius = "0px";
+                kotak41.style.borderRadius = "0px";
+                klick -= 1;
+                if (nilai == 3) { klick = 10; end(); }
+            }
+        }
+
+        function mainualng() {
+            klick = 0;
+            nilai = 0;
+            no1.style.display = "block";
+            no2.style.display = "flex";
+            no3.style.display = "flex";
+            no4.style.display = "flex";
+            no5.style.display = "flex";
+            no6.style.display = "flex";
+            no7.style.display = "flex";
+            no8.style.display = "flex";
+            no9.style.display = "flex";
+
+
+            kotak11.style.borderRadius = "0px";
+            kotak12.style.scale = "100%";
+            kotak12.style.borderRadius = "0px";
+            kotak11.style.transform = "rotate(0deg)";
+            kotak21.style.borderRadius = "0px";
+            kotak22.style.scale = "100%";
+            kotak22.style.borderRadius = "0px";
+            kotak21.style.transform = "rotate(0deg)";
+            kotak31.style.borderRadius = "0px";
+            kotak32.style.scale = "100%";
+            kotak32.style.borderRadius = "0px";
+            kotak31.style.transform = "rotate(0deg)";
+            kotak41.style.borderRadius = "0px";
+            kotak42.style.scale = "100%";
+            kotak42.style.borderRadius = "0px";
+            kotak41.style.transform = "rotate(0deg)";
+            kotak51.style.borderRadius = "0px";
+            kotak52.style.scale = "100%";
+            kotak52.style.borderRadius = "0px";
+            kotak51.style.transform = "rotate(0deg)";
+            kotak61.style.borderRadius = "0px";
+            kotak62.style.scale = "100%";
+            kotak62.style.borderRadius = "0px";
+            kotak61.style.transform = "rotate(0deg)";
+            kotak71.style.borderRadius = "0px";
+            kotak72.style.scale = "100%";
+            kotak72.style.borderRadius = "0px";
+            kotak71.style.transform = "rotate(0deg)";
+            kotak81.style.borderRadius = "0px";
+            kotak82.style.scale = "100%";
+            kotak82.style.borderRadius = "0px";
+            kotak81.style.transform = "rotate(0deg)";
+            kotak91.style.borderRadius = "0px";
+            kotak92.style.scale = "100%";
+            kotak92.style.borderRadius = "0px";
+            kotak91.style.transform = "rotate(0deg)";
+
+            kotak11.style.width = "60px";
+            kotak12.style.height = "60px";
+            kotak21.style.width = "60px";
+            kotak22.style.height = "60px";
+            kotak31.style.width = "60px";
+            kotak32.style.height = "60px";
+            kotak41.style.width = "60px";
+            kotak42.style.height = "60px";
+            kotak51.style.width = "60px";
+            kotak52.style.height = "60px";
+            kotak61.style.width = "60px";
+            kotak62.style.height = "60px";
+            kotak71.style.width = "60px";
+            kotak72.style.height = "60px";
+            kotak81.style.width = "60px";
+            kotak82.style.height = "60px";
+            kotak91.style.width = "60px";
+            kotak92.style.height = "60px";
+
+            kotak11.style.height = "60px";
+            kotak12.style.width = "60px";
+            kotak21.style.height = "60px";
+            kotak22.style.width = "60px";
+            kotak31.style.height = "60px";
+            kotak32.style.width = "60px";
+            kotak41.style.height = "60px";
+            kotak42.style.width = "60px";
+            kotak51.style.height = "60px";
+            kotak52.style.width = "60px";
+            kotak61.style.height = "60px";
+            kotak62.style.width = "60px";
+            kotak71.style.height = "60px";
+            kotak72.style.width = "60px";
+            kotak81.style.height = "60px";
+            kotak82.style.width = "60px";
+            kotak91.style.height = "60px";
+            kotak92.style.width = "60px";
+
+            kotak31.style.backgroundColor = "#ffffff";
+            kotak32.style.backgroundColor = "#ffffff";
+            kotak51.style.backgroundColor = "#ffffff";
+            kotak52.style.backgroundColor = "#ffffff";
+            kotak71.style.backgroundColor = "#ffffff";
+            kotak72.style.backgroundColor = "#ffffff";
+
+            papan.style.display = "none";
+            mainlagi.style.display = "none";
+
+        }
+
+    </script>
+</body>
+
+</html>
